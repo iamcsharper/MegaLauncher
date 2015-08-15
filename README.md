@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-# FunMod 
-=======
-# MegaLauncher
->>>>>>> origin/master
+#MEGA
