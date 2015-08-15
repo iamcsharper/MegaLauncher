@@ -1,5 +1,15 @@
 package net.xupoh.megalauncher.main;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import com.google.gson.Gson;
+
+import net.xupoh.megalauncher.utils.FileUtils;
+import net.xupoh.megalauncher.utils.ProcessUtils;
+
 /**
  *
  * @author Илья
@@ -10,9 +20,47 @@ public class Starter {
 	}
 
 	public static void main(String[] args) {
-		long start = System.nanoTime();
-		Starter.log("[Starter] Started with " + args.length + " args.");
+		try {
+			long start = System.nanoTime();
+			
+			String jarpath = Starter.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+			// TODO !!!!!!!
+			int memory = 1536;
 
-		Engine.init(start);
+			ArrayList<String> params = new ArrayList<String>();
+			params.add(System.getProperty("java.home") + "/bin/java");
+
+			if (System.getProperty("sun.arch.data.model").equals("32") && (memory > 1024)) {
+				memory = 1024;
+			}
+
+			params.add("-Xmx" + memory + "m");
+			params.add("-XX:MaxPermSize=512m");
+
+			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
+				params.add("-Xdock:name=Minecraft");
+			}
+
+			params.add("-classpath");
+			params.add(jarpath);
+			params.add(Main.class.getCanonicalName());
+			params.add(start+"");
+
+			ProcessBuilder pb = new ProcessBuilder(params);
+			pb.directory(FileUtils.getWorkingDirectory());
+			Process process = pb.start();
+			if (process == null)
+				throw new Exception("Launcher can't be started!");
+			new ProcessUtils(process).print();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e, "Ошибка запуска (Starter) ", javax.swing.JOptionPane.ERROR_MESSAGE, null);
+			try {
+				Class<?> af = Class.forName("java.lang.Shutdown");
+				Method m = af.getDeclaredMethod("halt0", int.class);
+				m.setAccessible(true);
+				m.invoke(null, 1);
+			} catch (Exception x) {
+			}
+		}
 	}
 }
