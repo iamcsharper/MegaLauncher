@@ -122,7 +122,7 @@ public class GameLauncher extends AbstractProccess {
 		params.add("-Xms2048m");
 		
 		Engine.frame.setVisible(false);
-		 
+		
 		final Class<?> start = cl.loadClass(className);
 		final Method main = start.getMethod("main", String[].class);
 
