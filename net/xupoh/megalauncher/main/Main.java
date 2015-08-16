@@ -9,7 +9,9 @@ public class Main {
 			long started = 0;
 
 			if (args.length < 1) {
-				test = false;
+				Starter.main(args);
+				
+				return;
 			} else {
 				started = Long.parseLong(args[0]);
 			}

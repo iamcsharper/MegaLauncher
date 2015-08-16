@@ -1,4 +1,4 @@
-package net.xupoh.megalauncher.operations;
+﻿package net.xupoh.megalauncher.operations;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
