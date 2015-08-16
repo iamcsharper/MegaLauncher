@@ -38,7 +38,7 @@ public class Starter {
 
 			params.add("-Xmx" + memory + "m");
 			params.add("-Xms" + memory + "m");
-			params.add("-XX:MaxPermSize=1024m");
+			params.add("-XX:MaxPermSize=1024m"); 
 
 			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
 				params.add("-Xdock:name=Minecraft");

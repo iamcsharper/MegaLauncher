@@ -37,7 +37,7 @@ public class Engine {
 
 		double dif = Math.rint(100 * (System.nanoTime() - start) / 1000000000) / 100;
 		Starter.log("Initializtaion speed: " + dif + " s");
-	}
+	} 
 
 	private static void setStyles() {
 		imageLoader.loadLocal("background", "bg.png");

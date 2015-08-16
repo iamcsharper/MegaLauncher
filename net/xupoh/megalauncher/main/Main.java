@@ -16,7 +16,7 @@ public class Main {
 				started = Long.parseLong(args[0]);
 			}
 
-			if (started == 0) {
+			if (started == 0) { 
 				test = false;
 			}
 
