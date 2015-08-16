@@ -25,7 +25,7 @@ public class Starter {
 			
 			String jarpath = Starter.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
 			// TODO !!!!!!!
-			int memory = 1536;
+			int memory = 2048;
 
 			ArrayList<String> params = new ArrayList<String>();
 			params.add(System.getProperty("java.home") + "/bin/java");
@@ -35,7 +35,8 @@ public class Starter {
 			}
 
 			params.add("-Xmx" + memory + "m");
-			params.add("-XX:MaxPermSize=512m");
+			params.add("-Xms" + memory + "m");
+			params.add("-XX:MaxPermSize=1024m");
 
 			if (System.getProperty("os.name").toLowerCase().startsWith("mac")) {
 				params.add("-Xdock:name=Minecraft");
